@@ -1,0 +1,17 @@
+.wrapper {
+  margin: 0;
+  padding-top: 5rem;
+  background-color: #f2f2f2;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-img {
+  width: 30rem;
+}
+
+.product-detail {
+  padding: 1rem;
+}
