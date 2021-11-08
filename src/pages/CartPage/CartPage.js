@@ -19,8 +19,8 @@ const CartPage = () => {
     };
 
     const dispatch = useDispatch();
-    const products = useSelector(state => state.products.products)
-    const loading = useSelector(state => state.products.loading)
+    const carts = useSelector(state => state.carts.cart)
+    const loading = useSelector(state => state.carts.loading)
 
     useEffect(() => {
     if (cartProductId) return;
@@ -44,8 +44,8 @@ const CartPage = () => {
             </div>
           ) : (
             <ul className="list-unstyled d-flex flex-wrap justify-content-between">
-              {products.map((product) => (
-                <li key={product._id}>
+              {carts.map((product) => (
+                <li key={product.productId._id}>
                   <Card className="d-flex flex-direction-row"
                     style={{
                      width: "12rem",
@@ -56,17 +56,17 @@ const CartPage = () => {
                   >
                           <Card.Img
                               variant="top"
-                      src={product.imageUrls[0]}
+                      src={product.productId.imageUrls[0]}
                       onClick={() => handleClickProduct(product._id)}
                     />
                     <Card.Body>
-                      <Card.Title>{product.name}</Card.Title>
-                      <Card.Text>{product.price.toLocaleString()}</Card.Text>
+                      <Card.Title>{product.productId.name}</Card.Title>
+                      <Card.Text>{product.productId.price.toLocaleString()}</Card.Text>
                       <Button
                         className="position-absolute btn-danger"
                         style={{ top: "5px", right: "5px" }}
                         size="sm"
-                        onClick={() => removeCart(product._id)}
+                        onClick={() => removeCart(product.productId._id)}
                       >
                         &times;
                       </Button>

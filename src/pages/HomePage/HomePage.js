@@ -3,7 +3,6 @@ import { Alert, Button, Card, Carousel, Col, Container, Row, Spinner } from 'rea
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import ProductPagination from '../../components/ProductPagination';
-import SearchForm from '../../components/SearchForm/SearchForm';
 import productAction from '../../redux/actions/product.action';
 import './HomePage.css'
 
@@ -18,12 +17,6 @@ const HomePage = () => {
     const handleSearchInputChange = (e) => {
     setSearchInput(e.target.value);
     };
-
-    const handleSubmit = (e) => {
-    e.preventDefault();
-    setQuery(searchInput);
-    };
-    console.log(query)
 
     const navigate = useNavigate();
 

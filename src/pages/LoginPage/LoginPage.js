@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
 import authAction from '../../redux/actions/auth.action';
 import "./LoginPage.css"
 
@@ -8,15 +10,20 @@ const LoginPage = () => {
     const [dataForm, setDataForm] = useState({
     email: "",
     password: "",
-  });
+    });
+  
+  const navigate = useNavigate
+  
   const { email, password } = dataForm;
   const handleOnChange = (e) => {
     setDataForm({ ...dataForm, [e.target.name]: e.target.value });
   };
+  
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(authAction.login({ email, password }));
+    navigate('/')
   };
 
   return (
@@ -46,6 +53,7 @@ const LoginPage = () => {
         <Button variant="primary" type="submit">
           Submit
         </Button>
+        <small>Create an account <span>here</span></small>
       </Form>
     </div>
   );

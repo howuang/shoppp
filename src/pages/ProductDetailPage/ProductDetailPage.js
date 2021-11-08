@@ -21,8 +21,8 @@ const ProductDetailPage = () => {
     const [review, setReview] = useState("")
     
 
-    const addToCart = (product) => {
-        setCartProduct(product)
+    const addToCart = (productId) => {
+        setCartProduct(productId)
     };
 
      useEffect(() => {
@@ -86,7 +86,7 @@ const ProductDetailPage = () => {
                 <div>
                   <p>{product.description}</p>
                 </div>
-                    <Button onClick={() => addToCart(product)}>Add to Cart</Button>{" "}
+                    <Button onClick={() => addToCart(product._id)}>Add to Cart</Button>{" "}
                     <div>
                         <strong>Write us your review</strong>
                         <br />

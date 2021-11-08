@@ -21,6 +21,7 @@ authAction.login =  ({ email, password }) =>
     try {
       dispatch({ type: types.POST_LOGIN_REQUEST });
       const res = await api.post("/auth/login", { email, password });
+      console.log("logged in as", res.data.data.user)
         dispatch({ type: types.POST_LOGIN_SUCCESS, payload: res.data.data.user })
         api.defaults.headers.common["authorization"]= "Bearer " + res.data.data.accessToken
         localStorage.setItem("token", res.data.data.accessToken)
@@ -29,5 +30,20 @@ authAction.login =  ({ email, password }) =>
         dispatch({type: types.POST_LOGIN_FAIL})
     }
         };
+
+authAction.logout =  () =>
+  async (dispatch) => {
+    try {
+      dispatch({ type: types.POST_LOGIN_REQUEST });
+      const res = await api.post("/auth/login");
+        dispatch({ type: types.POST_LOGIN_SUCCESS, payload: res.data.data.user })
+        // api.defaults.headers.common["authorization"]= "Bearer " + res.data.data.accessToken
+        localStorage.removeItem("token", res.data.data.accessToken)
+    } catch (err) {
+        console.log(err);
+        dispatch({type: types.POST_LOGIN_FAIL})
+    }
+        };
+
 
 export default authAction;

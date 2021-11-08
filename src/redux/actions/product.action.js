@@ -8,7 +8,20 @@ productAction.getAllProducts = ({page, limit, query}) => async (dispatch) => {
     try {
         dispatch({ type: types.GET_ALL_PRODUCTS_REQUEST, payload: null })
         let url = `/products?page=${page}&limit=${limit}`
-        if (query) url += `$q=${query}`;
+        if (query) url += `&q=${query}`;
+        const res = await api.get(url)
+        dispatch({type: types.GET_ALL_PRODUCTS_SUCCESS, payload: res.data.data.products, totalPage: res.data.data.totalPages})
+    } catch (error) {
+        console.log(error)
+        dispatch({type: types.GET_ALL_PRODUCTS_FAIL, payload: error.message})
+    }
+}
+
+productAction.getSearchProducts = ({page, limit, query}) => async (dispatch) => {
+    try {
+        dispatch({ type: types.GET_ALL_PRODUCTS_REQUEST, payload: null })
+        let url = `/products?page=${page}&limit=${limit}`
+        if (query) url += `&q=${query}`;
         const res = await api.get(url)
         dispatch({type: types.GET_ALL_PRODUCTS_SUCCESS, payload: res.data.data.products, totalPage: res.data.data.totalPages})
     } catch (error) {
@@ -22,7 +35,7 @@ productAction.getDetail = ({productId}) => async (dispatch) => {
         dispatch({ type: types.GET_SINGLE_PRODUCT_REQUEST })
         let url = `/products/${productId}`;
         const res = await api.get(url);
-        console.log("single product", res.data.data.product)
+        // console.log("single product", res.data.data.product)
         dispatch({type: types.GET_SINGLE_PRODUCT_SUCCESS, payload: res.data.data.product})
         
     } catch (error) {

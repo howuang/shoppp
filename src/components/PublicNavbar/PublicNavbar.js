@@ -1,32 +1,41 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Col, Container, Form, FormControl, Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, NavLink } from 'react-router-dom'
 import './PublicNavbar.css'
 import { useNavigate } from "react-router-dom";
 import productAction from '../../redux/actions/product.action'
+import userActions from '../../redux/actions/user.action'
+import authAction from '../../redux/actions/auth.action'
 
 const PublicNavbar = () => {
-  const [query, setQuery] = useState("");
-    const [pageNum, setPageNum] = useState(1);
-    const limit = 10;
+  const [searchInput, setSearchInput] = useState("");
+  const [query, setQuery] = useState("")
+  const [pageNum, setPageNum] = useState(1);
+  const limit = 10;
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const handleSearchChange = (e) => {
-        e.preventDefault();
-        setQuery(e.target.value);
-    }
+  const handleSearchChange = (e) => {
+    setSearchInput(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate(`/search/${searchInput}`)
+  };
+
+  const user = useSelector(state => state.users.currentUser)
 
   const navigate = useNavigate()
   
-  const handleSubmit = (e) => {
-      e.preventDefault();
-      dispatch(productAction.getAllProducts({pageNum, limit, query}));
+  const handleOnClick = (e) => {
+    setQuery(e)
+    navigate(`/products/categories/${e}`)
   }
 
-  const handleOnClick = (e) => {
-    navigate(`/products/categories/${e}`)
+  const handleLogOut = (e) => {
+    dispatch(authAction.logout)
   }
 
     return (
@@ -60,9 +69,18 @@ const PublicNavbar = () => {
                     onChange={handleSearchChange}
                     style={{backgroundColor:"lightgrey"}}
                     />
-                    <Button as={NavLink} to="/product" onClick={handleSubmit} variant="outline-secondary">Search</Button>
-                </Form>
-            <Nav.Link as={NavLink} to="/login">Log in</Nav.Link>
+                    <Button onClick={handleSubmit} variant="outline-secondary">Search</Button>
+            </Form>
+            {!user && (
+              <Nav.Link as={NavLink} to="/login">Log in</Nav.Link>
+            )}
+            {user && (
+              <NavDropdown title={user.name} id="navbarScrollingDropdown">
+          <NavDropdown.Item as={NavLink} to="/profile">Profile</NavDropdown.Item>
+          <NavDropdown.Item onClick={handleLogOut}>Log out</NavDropdown.Item>
+        </NavDropdown>
+              // <Nav.Link as={NavLink} to="/profile">Logged in as {user.name}</Nav.Link>
+            )}
         <Nav.Link style={{color: "white", cursor: "pointer"}} as={NavLink} to="/cart">
           <i class="fas fa-shopping-cart"></i>
         </Nav.Link>

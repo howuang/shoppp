@@ -4,20 +4,19 @@ import { toast } from "react-toastify";
 
 const userActions = {};
 
-userActions.getCurrentUser =
-  () =>
-  async (dispatch) => {
+userActions.getCurrentUser = () => async (dispatch) => {
     try {
       dispatch({ type: types.GET_SINGLE_USER_REQUEST });
-      const res = await api.get("/users/me");
-        dispatch({type: types.GET_SINGLE_USER_SUCCESS})
+        const res = await api.get("/users/me");
+        // console.log("user", res.data.data.user)
+        dispatch({type: types.GET_SINGLE_USER_SUCCESS, payload: res.data.data.user})
     } catch (err) {
         console.log(err);
         dispatch({type: types.GET_SINGLE_USER_FAIL})
     }
         };
 
-        userActions.postReview = ({ productId, review, rating}) => {
+userActions.postReview = ({ productId, review, rating}) => {
     return async (dispatch) => {
         dispatch({type: types.POST_REVIEW_REQUEST});
         try {

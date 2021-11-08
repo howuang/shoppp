@@ -11,6 +11,7 @@ import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import HomePage from "./pages/HomePage/HomePage";
 import CartPage from "./pages/CartPage/CartPage";
 import CategoriesPage from "./pages/CategoriesPage/CategoriesPage";
+import SearchPage from "./pages/SearchPage/SearchPage";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route exact path="/login" element={<LoginPage />} />
           <Route exact path="/register" element={<RegisterPage />} />
           <Route exact path="/profile" element={<ProfilePage />} />
+          <Route exact path="/search/:id" element={<SearchPage/>}/>
           <Route exact path="/cart" element={<CartPage />} />
           <Route exact path="/products/categories/:id" element={<CategoriesPage/>}/>
           <Route exact path="/products/:id" element={<ProductDetailPage />} />
