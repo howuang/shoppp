@@ -1,4 +1,4 @@
-# Week 6 - Weekly project with redux
+# Week 8 - Ecommerce Front End
 
 ## Requirements:
 

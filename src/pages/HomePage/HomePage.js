@@ -90,7 +90,6 @@ const HomePage = () => {
                         setPage={setPage}
                         totalPage={totalPage}
                     />
-
                 </Row>
             </Container>
         </div>
