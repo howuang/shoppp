@@ -1,7 +1,7 @@
-# Shopp - Ecommerce Front End
+# Shopp - E-commerce Website
 
 ## Description:
-This exercise is a Ecommerce Website fetching data from a provided Back End API.
+This exercise is a E-commerce Website fetching data from a provided Back End API using React JS and Redux in Full Stack Web Development Bootcamp at Coderschool.
 
 ## Requirements:
 
