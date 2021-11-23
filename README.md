@@ -1,4 +1,7 @@
-# Week 8 - Ecommerce Front End
+# Shopp - Ecommerce Front End
+
+## Description:
+This exercise is a Ecommerce Website fetching data from a provided Back End API.
 
 ## Requirements:
 
